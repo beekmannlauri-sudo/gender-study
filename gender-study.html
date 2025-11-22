@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Use & Gender: A Research Analysis</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Merriweather', serif; }
+        .gradient-text {
+            background: linear-gradient(90deg, #1e40af, #0d9488);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    <script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+      key: "AIzaSyBB_SVKlC9CcEjDt1H01_B7Gjmb8FiIaGw",
+      v: "weekly",
+    });
+    <\/script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<!-- Navigation -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-teal-600">schedule</span>
+                <span class="font-bold text-xl tracking-tight text-slate-900">GenderTime<span class="text-teal-600">Lab</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#introduction" class="text-slate-600 hover:text-teal-600 font-medium">Study</a>
+                <a href="#data-explorer" class="text-slate-600 hover:text-teal-600 font-medium">Data Explorer</a>
+                <a href="#health-impact" class="text-slate-600 hover:text-teal-600 font-medium">Health Impact</a>
+                <a href="#conclusions" class="text-slate-600 hover:text-teal-600 font-medium">Conclusions</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header id="introduction" class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1920" alt="Time Use Illustration" class="w-full h-full object-cover opacity-10">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <div class="text-center">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-teal-100 text-teal-800 text-sm font-semibold mb-6">
+                Based on 2024 Research by Matud et al.
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-slate-900 leading-tight">
+                How We Spend Our Time:<br>
+                <span class="gradient-text">A Gender Analysis</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 leading-relaxed">
+                Time is our most valuable resource, but it is not spent equally. Explore how gender shapes our daily lives, from housework to leisure, and how these choices impact our health and well-being across the life cycle.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#data-explorer" class="px-8 py-3 bg-teal-600 text-white rounded-lg font-semibold shadow-lg hover:bg-teal-700 transition transform hover:-translate-y-1">
+                    Explore the Data
+                </a>
+                <a href="https://doi.org/10.3390/socsci13060307" target="_blank" class="px-8 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition">
+                    Read Paper
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Study Overview -->
+<section class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                <span class="material-symbols-outlined text-4xl text-blue-600 mb-4">groups</span>
+                <h3 class="text-lg font-bold text-slate-900">5,700 Participants</h3>
+                <p class="text-slate-600 mt-2">A large-scale study of the Spanish general population.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                <span class="material-symbols-outlined text-4xl text-teal-600 mb-4">wc</span>
+                <h3 class="text-lg font-bold text-slate-900">Gender Breakdown</h3>
+                <p class="text-slate-600 mt-2">54.2% Women, 45.8% Men ranging from 14 to 85 years old.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                <span class="material-symbols-outlined text-4xl text-indigo-600 mb-4">timeline</span>
+                <h3 class="text-lg font-bold text-slate-900">5 Life Stages</h3>
+                <p class="text-slate-600 mt-2">From Adolescence through Emerging Adulthood to Old Age.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interactive Data Explorer -->
+<section id="data-explorer" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">The Gender Time Gap Explorer</h2>
+            <p class="text-slate-600 mt-4 max-w-2xl mx-auto">
+                Select a category below to visualize how time use changes for men and women across different stages of life.
+            </p>
+        </div>
+        
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+            <!-- Controls Panel -->
+            <div class="lg:w-1/4 bg-slate-100 p-6 lg:p-8 flex flex-col gap-4 border-r border-slate-200">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-2">Select Activity</h3>
+                
+                <button onclick="updateChart('housework')" id="btn-housework" class="chart-btn active w-full text-left px-4 py-3 rounded-xl transition flex items-center gap-3 bg-white shadow-sm ring-1 ring-slate-200">
+                    <span class="material-symbols-outlined text-teal-600">cleaning_services</span>
+                    <div>
+                        <div class="font-bold text-slate-800">Housework</div>
+                        <div class="text-xs text-slate-500">Unpaid domestic labor</div>
+                    </div>
+                </button>
+                
+                <button onclick="updateChart('childcare')" id="btn-childcare" class="chart-btn w-full text-left px-4 py-3 rounded-xl transition flex items-center gap-3 hover:bg-white hover:shadow-sm text-slate-600">
+                    <span class="material-symbols-outlined text-blue-500">child_care</span>
+                    <div>
+                        <div class="font-bold">Childcare</div>
+                        <div class="text-xs opacity-70">Direct care for children</div>
+                    </div>
+                </button>
+                
+                <button onclick="updateChart('exercise')" id="btn-exercise" class="chart-btn w-full text-left px-4 py-3 rounded-xl transition flex items-center gap-3 hover:bg-white hover:shadow-sm text-slate-600">
+                    <span class="material-symbols-outlined text-orange-500">fitness_center</span>
+                    <div>
+                        <div class="font-bold">Exercise</div>
+                        <div class="text-xs opacity-70">Weekly physical activity</div>
+                    </div>
+                </button>
+                
+                <button onclick="updateChart('enjoyable')" id="btn-enjoyable" class="chart-btn w-full text-left px-4 py-3 rounded-xl transition flex items-center gap-3 hover:bg-white hover:shadow-sm text-slate-600">
+                    <span class="material-symbols-outlined text-purple-500">sentiment_satisfied</span>
+                    <div>
+                        <div class="font-bold">Enjoyable Activities</div>
+                        <div class="text-xs opacity-70">Hobbies & Leisure</div>
+                    </div>
+                </button>
+
+                <div class="mt-auto pt-6 border-t border-slate-200">
+                    <p class="text-xs text-slate-400">Data source: Matud et al. (2024), Tables 3 & 4.</p>
+                </div>
+            </div>
+
+            <!-- Visualization Panel -->
+            <div class="lg:w-3/4 p-6 lg:p-10 flex flex-col">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h3 id="chart-title" class="text-2xl font-bold text-slate-900">Daily Housework Time</h3>
+                        <p id="chart-desc" class="text-slate-500">Average minutes per day spent on household chores.</p>
+                    </div>
+                    <div class="flex gap-4 text-sm font-semibold">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-teal-500"></span> Women
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-slate-400"></span> Men
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container bg-white rounded-lg">
+                    <canvas id="mainChart"></canvas>
+                </div>
+
+                <!-- Dynamic Insight Box -->
+                <div id="insight-box" class="mt-8 p-6 bg-blue-50 border border-blue-100 rounded-xl flex items-start gap-4 fade-in">
+                    <span class="material-symbols-outlined text-blue-600 text-3xl">lightbulb</span>
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-1">Key Insight</h4>
+                        <p id="insight-text" class="text-blue-800">
+                            While adolescence starts with equality, a massive gap opens in adulthood. By old age, women spend over 4 hours a day on housework, while men average just over 1 hour.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Health Impact Section -->
+<section id="health-impact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">The Cost of Inequality</h2>
+                <p class="text-lg text-slate-600 mb-6">
+                    The study didn't just measure time; it measured the <em>impact</em> of that time on physical and mental health. The findings reveal a stark contrast in how unpaid work and leisure affect wellbeing.
+                </p>
+                
+                <div class="space-y-6">
+                    <div class="group p-4 rounded-xl border border-slate-200 hover:border-red-200 hover:bg-red-50 transition cursor-default">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="p-2 bg-red-100 text-red-600 rounded-lg">
+                                <span class="material-symbols-outlined">sentiment_very_dissatisfied</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900">Housework & Health</h3>
+                        </div>
+                        <p class="text-slate-600">
+                            For women, more time spent on housework is significantly associated with <strong>worse self-rated health</strong>, more chronic illnesses, and higher anxiety levels.
+                        </p>
+                    </div>
+
+                    <div class="group p-4 rounded-xl border border-slate-200 hover:border-green-200 hover:bg-green-50 transition cursor-default">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="p-2 bg-green-100 text-green-600 rounded-lg">
+                                <span class="material-symbols-outlined">cardiology</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900">The Power of Exercise</h3>
+                        </div>
+                        <p class="text-slate-600">
+                            Across all groups, time spent exercising was strongly linked to <strong>better health, lower somatic symptoms, and higher psychological well-being</strong>. However, men consistently spend more time exercising than women.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                 <!-- Abstract Illustration -->
+                 <div class="w-full h-96 bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl border border-slate-200 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-9xl text-slate-200">balance</span>
+                 </div>
+                <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg border border-slate-100 max-w-xs hidden md:block">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="material-symbols-outlined text-yellow-500">warning</span>
+                        <span class="font-bold text-slate-800">Double Burden</span>
+                    </div>
+                    <p class="text-sm text-slate-600">Women often face the "double burden" of paid work and unpaid domestic labor, leading to higher stress.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Conclusions -->
+<section id="conclusions" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 p-12 opacity-5">
+        <span class="material-symbols-outlined text-9xl">format_quote</span>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <h2 class="text-3xl font-bold mb-8">Conclusions</h2>
+        <p class="text-xl md:text-2xl font-light leading-relaxed mb-10">
+            "Gender is relevant to time use and the impact of different uses of time on health and well-being. Women spent more time than men on housework and childcare, while men spent more time than women on enjoying activities and exercise."
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <div class="bg-slate-800 px-6 py-4 rounded-full border border-slate-700">
+                <span class="text-teal-400 font-bold">Inequality Increases with Age</span>
+            </div>
+            <div class="bg-slate-800 px-6 py-4 rounded-full border border-slate-700">
+                <span class="text-teal-400 font-bold">Unpaid Work = Health Risk</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-slate-950 text-slate-500 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-sm">
+            <p>Generated Interactive Workup.</p>
+            <p class="mt-1">Source: Matud, M.P. et al. (2024). <em>Social Sciences</em> 13: 307.</p>
+        </div>
+        <a href="https://doi.org/10.3390/socsci13060307" target="_blank" class="flex items-center gap-2 hover:text-white transition">
+            <span class="material-symbols-outlined">link</span>
+            View Original Paper
+        </a>
+    </div>
+</footer>
+
+<!-- Chart Logic -->
+<script>
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    
+    const labels = ['Adolescence', 'Emerging Adulthood', 'Established Adulthood', 'Midlife', 'Old Age'];
+    
+    const datasets = {
+        housework: {
+            title: "Daily Housework Time",
+            desc: "Average minutes per day. Note the widening gap as adulthood begins.",
+            insight: "While adolescence starts with near equality, a massive gap opens in adulthood. By old age, women spend nearly 4 hours a day (238 min) on housework, while men average just over 1 hour (80 min).",
+            unit: 'minutes/day',
+            men: [50, 62, 72, 79, 80],
+            women: [57, 83, 161, 205, 238]
+        },
+        childcare: {
+            title: "Daily Childcare Time",
+            desc: "Average minutes per day (for those with children).",
+            insight: "The 'Motherhood Penalty' is stark in Emerging Adulthood, where mothers spend over 10 hours a day on childcare compared to fathers' ~5.8 hours. This gap narrows but persists until children are grown.",
+            unit: 'minutes/day',
+            men: [0, 348, 203, 125, 21],
+            women: [0, 643, 373, 153, 16]
+        },
+        exercise: {
+            title: "Weekly Exercise Time",
+            desc: "Average hours per week spent on physical activity.",
+            insight: "Men consistently spend more time exercising than women at every life stage. The gap is widest in adolescence (5.5h vs 3h), setting up lifelong patterns of leisure inequality.",
+            unit: 'hours/week',
+            men: [5.5, 4.7, 3.7, 3.0, 3.3],
+            women: [3.0, 2.5, 2.5, 3.5, 2.8]
+        },
+        enjoyable: {
+            title: "Enjoyable Activities",
+            desc: "Daily minutes spent on hobbies and preferred activities.",
+            insight: "Men generally protect their leisure time better than women. In Established Adulthood—the peak of career and family pressure—men still find ~2.5 hours for hobbies, while women drop to ~1.5 hours.",
+            unit: 'minutes/day',
+            men: [170, 160, 144, 120, 220],
+            women: [170, 150, 90, 110, 150]
+        }
+    };
+
+    let currentChart;
+
+    function initChart() {
+        currentChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Women',
+                        data: datasets.housework.women,
+                        borderColor: '#0d9488',
+                        backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#0d9488',
+                        pointRadius: 6,
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: 'Men',
+                        data: datasets.housework.men,
+                        borderColor: '#94a3b8',
+                        backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#94a3b8',
+                        pointRadius: 6,
+                        tension: 0.3,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        padding: 12,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + ' ' + (datasets.housework.unit.includes('hour') ? 'hrs' : 'min');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function updateChart(key) {
+        const data = datasets[key];
+        document.getElementById('chart-title').textContent = data.title;
+        document.getElementById('chart-desc').textContent = data.desc;
+        document.getElementById('insight-text').textContent = data.insight;
+        
+        const insightBox = document.getElementById('insight-box');
+        insightBox.classList.remove('fade-in');
+        void insightBox.offsetWidth;
+        insightBox.classList.add('fade-in');
+
+        document.querySelectorAll('.chart-btn').forEach(btn => {
+            btn.classList.remove('bg-white', 'shadow-sm', 'ring-1', 'ring-slate-200');
+            btn.classList.add('text-slate-600');
+        });
+        const activeBtn = document.getElementById('btn-' + key);
+        activeBtn.classList.add('bg-white', 'shadow-sm', 'ring-1', 'ring-slate-200');
+        activeBtn.classList.remove('text-slate-600');
+
+        currentChart.data.datasets[0].data = data.women;
+        currentChart.data.datasets[1].data = data.men;
+        currentChart.update();
+    }
+
+    document.addEventListener('DOMContentLoaded', initChart);
+<\/script>
+</body>
+</html>
