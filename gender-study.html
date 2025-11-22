@@ -274,8 +274,7 @@
 
 <!-- Chart Logic -->
 <script>
-    const ctx = document.getElementById('mainChart').getContext('2d');
-    
+        
     const labels = ['Adolescence', 'Emerging Adulthood', 'Established Adulthood', 'Midlife', 'Old Age'];
     
     const datasets = {
@@ -316,6 +315,7 @@
     let currentChart;
 
     function initChart() {
+        const ctx = document.getElementById('mainChart').getContext('2d');
         currentChart = new Chart(ctx, {
             type: 'line',
             data: {
